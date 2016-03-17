@@ -9,7 +9,6 @@ __This gem does not guarantee the security of masked ids, since Hasids it is rev
 
 ## Getting started
 
-### Instalation
 You can add it to your `Gemfile`:
 
 ```ruby
