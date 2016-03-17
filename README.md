@@ -18,10 +18,12 @@ gem 'secret_id'
 Run the bundle command to install it.
 
 ### Configuring models
-After that, add a single line `secret_id` to your model, like below.
+After that, extends the model to `SecretId` and add a single line `secret_id` to this, like below.
 
 ```ruby
 class Post < ActiveRecord::Base
+  extend SecretId
+
   secret_id
 end
 ```
