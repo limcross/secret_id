@@ -49,6 +49,8 @@ Now you can try it in your `rails console`.
 
 ```ruby
 class Post < ActiveRecord::Base
+  extend SecretId
+
   secret_id salt: 'bring_your_own_salt', min_length: 5,
     alphabet: 'define_your_own_alphabet'
 end
