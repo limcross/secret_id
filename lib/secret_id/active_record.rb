@@ -5,6 +5,8 @@ module SecretId
     included do
       # Override ActiveRecord::FinderMethods#find_with_ids decoding ids
       def find_with_ids(*ids)
+        return super(*ids) unless @klass.is_a?(SecretId)
+
         raise UnknownPrimaryKey.new(@klass) if primary_key.nil?
 
         expects_array = ids.first.kind_of?(Array)
@@ -14,15 +16,29 @@ module SecretId
 
         case ids.size
         when 0
-          raise RecordNotFound, "Couldn't find #{@klass.name} without an ID"
+          raise ::ActiveRecord::RecordNotFound, "Couldn't find #{@klass.name} without an ID"
         when 1
-          result = find_one(decode_id(ids.first))
+          begin
+            id = decode_id(ids.first)
+          rescue
+            raise ::ActiveRecord::RecordNotFound, "Couldn't find #{@klass.name} with secret id=#{ids.first}"
+          end
+
+          result = find_one(id)
           expects_array ? [ result ] : result
         else
-          find_some(ids.map {|id| decode_id(id)})
+          ids.map! do |id|
+            begin
+              decode_id(id)
+            rescue
+              raise ::ActiveRecord::RecordNotFound, "Couldn't find #{@klass.name} with secret id=#{id}"
+            end
+          end
+
+          find_some(ids)
         end
       rescue RangeError
-        raise RecordNotFound, "Couldn't find #{@klass.name} with an out of range ID"
+        raise ::ActiveRecord::RecordNotFound, "Couldn't find #{@klass.name} with an out of range ID"
       end
     end
   end

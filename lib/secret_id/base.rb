@@ -5,12 +5,12 @@ module SecretId
     included do
       class_attribute :hashids
 
-      def id
-        self.class.encode_id(read_attribute(:id)) if read_attribute(:id)
+      def to_param
+        secret_id
       end
 
       def secret_id
-        read_attribute(:id)
+        self.class.encode_id(id) unless id.nil?
       end
     end
 
