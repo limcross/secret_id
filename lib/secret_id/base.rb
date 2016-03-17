@@ -6,7 +6,7 @@ module SecretId
       class_attribute :hashids
 
       def id
-        self.class.encode_id(read_attribute(:id))
+        self.class.encode_id(read_attribute(:id)) if read_attribute(:id)
       end
 
       def secret_id
