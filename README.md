@@ -80,7 +80,7 @@ def find_post
 end
 ```
 
-This method, as `find_by`, `where`, and everything like that, its not working for now. But not all is lost. If you want scope your result you can do something.
+This method, as `find_by`, `where`, and everything like that, its not working for now. But not all is lost. If you want scope your result you can do something like this.
 
 ```ruby
 def find_post
