@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/secret_id.svg)](https://badge.fury.io/rb/secret_id)
 [![Code Climate](https://codeclimate.com/github/limcross/secret_id/badges/gpa.svg)](https://codeclimate.com/github/limcross/secret_id)
 
-SecretId is a flexible masking identifiers solution for Rails with [Hashids](https://github.com/peterhellberg/hashids.rb).
+SecretId is a flexible solution for masking the identifiers of ActiveRecord. Using the [Hashids.rb](https://github.com/peterhellberg/hashids.rb) gem we encode the value of your defined primary key to hide the real value to the user.
 
 __This gem does not guarantee the security of masked ids, since Hasids it is reversible.__
 
@@ -18,7 +18,7 @@ gem 'secret_id'
 Run the bundle command to install it.
 
 ### Configuring models
-After that, extends the model to `SecretId` and add a single line `secret_id` to this, like below.
+After that, extend the model to `SecretId` and add `secret_id` to this, like below.
 
 ```ruby
 class Post < ActiveRecord::Base
@@ -39,6 +39,12 @@ Now you can try it in your `rails console`.
 
 > post.secret_id
 => "v40"
+
+> Post.decode_id("v40")
+=> 1
+
+> Post.encode_id(1234567890)
+=> "xrjlkB1"
 ```
 
 #### Options
@@ -59,7 +65,7 @@ end
 ### Configuring views
 In your views, use `@post` or `@post.secret_id` instead of `@post.id` for create links, like below.
 
-```erd
+```erb
 <%= link_to @post %>
 
 <%= link_to @post.secret_id %>
@@ -73,6 +79,14 @@ For controllers, you only can find the resource with the method `find` (At least
 ```ruby
 def find_post
   @post = Post.find(params[:id])
+end
+```
+
+Another good news is that this runs smoothly over associations.
+
+```ruby
+def find_user_post
+  current_user.posts.find(params[:id])
 end
 ```
 
@@ -92,10 +106,11 @@ def find_post
 end
 ```
 
-Another good news is that this runs smoothly.
+But if you are stubborn you can always use the wildcard for decode id manually.
 
 ```ruby
-current_user.posts.find(params[:id])
+def find_post
+  @post = Post.find_by!(id: Post.decode_id(params[:id]))
+end
 ```
-
-And now when you access to `post#show`, will be seen in the URL `v40` instead of `1`.
+_I personally do not recommend this, because if the parameter is not a valid encoded id, it will look for the id `nil`._

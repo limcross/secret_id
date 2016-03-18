@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Sebastián Orellana"]
   s.email       = ["limcross@gmail.com"]
   s.homepage    = "https://github.com/limcross/secret_id"
-  s.summary     = "Flexible masking identifiers solution for Rails with Hashids."
-  s.description = "Flexible masking identifiers solution for Rails with Hashids."
+  s.summary     = "SecretId is a flexible solution for masking the identifiers of ActiveRecord."
+  s.description = "SecretId is a flexible solution for masking the identifiers of ActiveRecord."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
