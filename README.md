@@ -63,12 +63,14 @@ end
 ```
 
 ### Configuring views
-In your views, use `@post` or `@post.secret_id` instead of `@post.id` for create links, like below.
+In your views, use `@post` or `@post.secret_id` instead of `@post.id` for create links, like any of below.
 
 ```erb
-<%= link_to @post %>
+<%= link_to "Post", @post %>
 
-<%= link_to @post.secret_id %>
+<%= link_to "Post", post_path(@post) %>
+
+<%= link_to "Post", post_path(@post.secret_id) %>
 ```
 
 And if you want to show the id remember use `secret_id` method.
