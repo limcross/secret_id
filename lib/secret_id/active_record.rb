@@ -12,6 +12,8 @@ module SecretId
             options = ids.slice!(ids.size - 1) if ids.last.kind_of?(Hash)
             options ||= {}
 
+            ids = ids.slice(0) if ids.first.kind_of?(Array)
+
             return super if options[:secret_id] === false
           end
 
