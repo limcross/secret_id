@@ -57,8 +57,6 @@ module SecretId
       module ClassMethods
         # Override ActiveRecord::Core#find decoding ids, if is necessary
         def find(*ids)
-
-
           if ids.length == 1
             return super if ids.first.kind_of?(Array)
           else
