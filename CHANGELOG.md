@@ -1,5 +1,9 @@
 ### Unreleased
 
+### 0.1.2
+  * bug fixes
+    * fix error in which always it was expected a matrix as a result of find methods.
+
 ### 0.1.1
   * improve intelligence of find methods
     * new scope for find without encode id, use `secret_id: false`.
