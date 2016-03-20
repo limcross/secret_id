@@ -9,7 +9,8 @@ module SecretId
     base.include SecretId::Base
 
     if defined?(::ActiveRecord::Base)
-      ::ActiveRecord::Relation.include SecretId::ActiveRecord
+      base.include SecretId::ActiveRecord::Core
+      ::ActiveRecord::Relation.include SecretId::ActiveRecord::FinderMethods
     end
 
     super

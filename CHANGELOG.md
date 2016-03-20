@@ -1,5 +1,13 @@
 ### Unreleased
 
+### 0.1.1
+  * improve intelligence of find methods
+    * new scope for find without encode id, use `secret_id: false`.
+  * bug fixes
+    * Fix bug that only allows find on STI.
+
+  I need tests for this stuff.
+
 ### 0.1.0
   * now `secret_id` instead of `id` shows the encoded value.
   * bug fixes

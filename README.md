@@ -40,6 +40,12 @@ Now you can try it in your `rails console`.
 > post.secret_id
 => "v40"
 
+> Post.find("v40")
+=> #<Post id: 1, ...>
+
+> Post.find(1, secret_id: false)
+=> #<Post id: 1, ...>
+
 > Post.decode_id("v40")
 => 1
 
