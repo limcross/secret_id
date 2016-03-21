@@ -5,7 +5,7 @@
 
 SecretId is a flexible solution for masking the identifiers of ActiveRecord. Using the [Hashids.rb](https://github.com/peterhellberg/hashids.rb) gem we encode the value of your defined primary key to hide the real value to the user.
 
-__This gem does not guarantee the security of masked ids, since Hasids it is reversible.__
+__This gem does not guarantee the security of masked ids, since Hashids it is reversible.__
 
 ## Getting started
 
