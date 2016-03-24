@@ -49,13 +49,13 @@ module SecretId
           else
             options = ids.slice!(ids.size - 1) if ids.last.kind_of?(Hash)
             options ||= {}
-            return super *ids, secret_id: false if options[:secret_id] === false
+            return super(*ids, secret_id: false) if options[:secret_id] === false
           end
 
           ids = ids.map { |id| decode_id(id) }
           ids = ids.first if ids.length == 1
 
-          return super *ids, secret_id: false
+          return super(*ids, secret_id: false)
         rescue SecretId::NotDecodable
           raise ::ActiveRecord::RecordNotFound, "Couldn't find #{self.name} with secret id=#{id} (could not be decoded)"
         end
