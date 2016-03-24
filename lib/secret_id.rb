@@ -1,5 +1,6 @@
 require 'active_support/concern'
 require 'secret_id/version'
+require 'secret_id/errors'
 
 module SecretId
   autoload :Base,         'secret_id/base'

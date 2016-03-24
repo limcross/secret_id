@@ -27,6 +27,8 @@ module SecretId
 
       def decode_id(hashed_id)
         self.hashids.decode(hashed_id).first
+      rescue
+        raise SecretId::NotDecodable, 'could not be decoded'
       end
 
       def encode_id(id)

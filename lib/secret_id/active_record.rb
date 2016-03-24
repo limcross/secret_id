@@ -11,9 +11,6 @@ module SecretId
           unless ids.length == 1
             options = ids.slice!(ids.size - 1) if ids.last.kind_of?(Hash)
             options ||= {}
-
-            ids = ids.slice(0) if ids.first.kind_of?(Array)
-
             return super if options[:secret_id] === false
           end
 
@@ -28,27 +25,15 @@ module SecretId
           when 0
             raise ::ActiveRecord::RecordNotFound, "Couldn't find #{@klass.name} without an ID"
           when 1
-            begin
-              id = decode_id(ids.first)
-            rescue
-              raise ::ActiveRecord::RecordNotFound, "Couldn't find #{@klass.name} with secret id=#{ids.first}"
-            end
-
-            result = find_one(id)
+            result = find_one(decode_id(ids.first))
             expects_array ? [ result ] : result
           else
-            ids.map! do |id|
-              begin
-                decode_id(id)
-              rescue
-                raise ::ActiveRecord::RecordNotFound, "Couldn't find #{@klass.name} with secret id=#{id}"
-              end
-            end
-
-            find_some(ids)
+            find_some(ids.map { |id| decode_id(id) })
           end
         rescue RangeError
           raise ::ActiveRecord::RecordNotFound, "Couldn't find #{@klass.name} with an out of range ID"
+        rescue SecretId::NotDecodable
+          raise ::ActiveRecord::RecordNotFound, "Couldn't find #{@klass.name} with secret id (could not be decoded)"
         end
       end
     end
@@ -64,20 +49,15 @@ module SecretId
           else
             options = ids.slice!(ids.size - 1) if ids.last.kind_of?(Hash)
             options ||= {}
-
-            return super ids, secret_id: false if options[:secret_id] === false
-            return super if ids.first.kind_of?(Array)
+            return super *ids, secret_id: false if options[:secret_id] === false
           end
 
-          ids.map! do |id|
-            begin
-              decode_id(id)
-            rescue
-              raise ::ActiveRecord::RecordNotFound, "Couldn't find #{self.name} with secret id=#{id}"
-            end
-          end
+          ids = ids.map { |id| decode_id(id) }
+          ids = ids.first if ids.length == 1
 
-          return super ids, secret_id: false
+          return super *ids, secret_id: false
+        rescue SecretId::NotDecodable
+          raise ::ActiveRecord::RecordNotFound, "Couldn't find #{self.name} with secret id=#{id} (could not be decoded)"
         end
       end
     end
