@@ -57,7 +57,7 @@ module SecretId
 
           return super(*ids, secret_id: false)
         rescue SecretId::NotDecodable
-          raise ::ActiveRecord::RecordNotFound, "Couldn't find #{self.name} with secret id=#{id} (could not be decoded)"
+          raise ::ActiveRecord::RecordNotFound, "Couldn't find #{self.name} with secret id (could not be decoded)"
         end
       end
     end
