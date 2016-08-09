@@ -1,4 +1,3 @@
 module SecretId
-  class NotDecodable < StandardError
-  end
+  class NotDecodable < StandardError; end
 end

@@ -1,5 +1,6 @@
 # SecretId
 
+[![Build Status](https://travis-ci.org/limcross/secret_id.svg?branch=master)](https://travis-ci.org/limcross/secret_id)
 [![Gem Version](https://badge.fury.io/rb/secret_id.svg)](https://badge.fury.io/rb/secret_id)
 [![Code Climate](https://codeclimate.com/github/limcross/secret_id/badges/gpa.svg)](https://codeclimate.com/github/limcross/secret_id)
 
