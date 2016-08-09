@@ -123,3 +123,29 @@ def find_post
 end
 ```
 _I personally do not recommend this, because if the parameter is not a valid encoded id, it will look for the id `nil`._
+
+## Contributing
+Any contribution is welcome.
+
+### Reporting issues
+
+Please try to answer the following questions in your bug report:
+
+- What did you do?
+- What did you expect to happen?
+- What happened instead?
+
+Make sure to include as much relevant information as possible. Ruby version,
+SecretId version, OS version and any stack traces you have are very valuable.
+
+### Pull Requests
+
+- __Add tests!__ Your patch won't be accepted if it doesn't have tests.
+
+- __Document any change in behaviour__. Make sure the README and any  relevant documentation are kept up-to-date.
+
+- __Create topic branches__. Please don't ask us to pull from your master branch.
+
+- __One pull request per feature__. If you want to do more than one thing, send multiple pull requests.
+
+- __Send coherent history__. Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before sending them to us.
