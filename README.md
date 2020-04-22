@@ -8,6 +8,12 @@ SecretId is a flexible solution for masking the identifiers of ActiveRecord. Usi
 
 __This gem does not guarantee the security of masked ids, since Hashids it is reversible.__
 
+### SecretId has been Deprecated
+
+__This repository has been deprecated and will no longer be maintained.__
+
+If your looking for a real solution i strongly recommend [friendly_id](https://github.com/norman/friendly_id).
+
 ## Getting started
 
 You can add it to your `Gemfile`:
